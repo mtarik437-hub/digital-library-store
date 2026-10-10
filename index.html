@@ -99,7 +99,7 @@
 const SUPABASE_URL = "https://djrjahfqqjsczrfxfutm.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Qf7gH2SRJy3k6c17-wAS9w_hKoRETEz ";
 const supabaseReady = !!(window.supabase && SUPABASE_PUBLISHABLE_KEY &&
-  !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR"));
+  !SUPABASE_PUBLISHABLE_KEY.includes("sb_publishable_Qf7gH2SRJy3k6c17-wAS9w_hKoRETEz"));
 const supabaseClient = supabaseReady
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
   : null;

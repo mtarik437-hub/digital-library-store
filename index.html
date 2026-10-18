@@ -1,4 +1,4 @@
-=<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -99,7 +99,7 @@
 const SUPABASE_URL = "https://djrjahfqqjsczrfxfutm.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Qf7gH2SRJy3k6c17-wAS9w_hKoRETEz";
 const supabaseReady = !!(window.supabase && SUPABASE_PUBLISHABLE_KEY &&
-!SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR"));
+  !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR"));
 const supabaseClient = supabaseReady
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
   : null;
@@ -129,31 +129,39 @@ function renderProducts(){
  (b.title+" "+b.author+" "+b.cat).toLowerCase().includes(query.toLowerCase()));
  const root=document.getElementById("products");
  if(!filtered.length){root.innerHTML='<div class="empty">ما لقينا كتب تطابق بحثك. جرّب كلمة ثانية.</div>';return}
- root.innerHTML=filtered.map(b=>`<article class="product"><div class="cover" style="background:${b.color || "#eaf7ff"}18">${b.image_url ? `<img src="${escapeHtml(b.image_url)}" alt="غلاف ${escapeHtml(b.title)}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;background:#fff">` : `<div class="fakebook" style="background:${b.color || "#4bb2ef"}">${escapeHtml(b.cover || b.title)}</div>`}${b.tag?`<span class="tag">${b.tag}</span>`:""}</div><div class="productbody"><span class="productcat">${b.cat}</span><h3>${b.title}</h3><div class="author">${b.author}</div><div class="price"><strong>${money(b.price)}</strong>${b.old?`<span class="oldprice">${money(b.old)}</span>`:""}</div><button class="addbtn" onclick="addToCart(${b.id})">＋ أضف إلى السلة</button></div></article>`).join("");
+ root.innerHTML=filtered.map(b=>`<article class="product"><div class="cover" style="background:${b.color || "#eaf7ff"}18">${b.image_url ? `<img src="${escapeHtml(b.image_url)}" alt="غلاف ${escapeHtml(b.title)}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;background:#fff">` : `<div class="fakebook" style="background:${b.color || "#4bb2ef"}">${escapeHtml(b.cover || b.title)}</div>`}${b.tag?`<span class="tag">${b.tag}</span>`:""}</div><div class="productbody"><span class="productcat">${b.cat}</span><h3>${b.title}</h3><div class="author">${b.author}</div><div class="price"><strong>${money(b.price)}</strong>${b.old?`<span class="oldprice">${money(b.old)}</span>`:""}</div><button class="addbtn" onclick="contactBook(${b.id})">＋ تواصل لطلب الكتاب</button></div></article>`).join("");
+}
+function contactBook(id){
+ const book = books.find(b => String(b.id) === String(id));
+ const title = book?.title || "كتاب";
+ const price = Number(book?.price || 0).toLocaleString("en-US");
+ const message = `السلام عليكم، أريد الاستفسار عن كتاب: ${title}، السعر: ${price} د.ع`;
+ window.open("https://wa.me/9647752275134" + encodeURIComponent(message), "_blank", "noopener");
 }
 function addToCart(id){cart[id]=(cart[id]||0)+1;updateCartCount();showToast("انضاف الكتاب إلى السلة ✓")}
 async function loadBooksFromSupabase(){
  if(!supabaseClient) return;
  try {
+   // Read the active books without hard-coding column names in select().
+   // This avoids a PostgREST 400 if the live table differs from an older schema.
    const { data, error } = await supabaseClient
      .from("books")
-     .select("id,title,author,description,price,image_url,stock,category,is_active")
-     .eq("is_active", true)
-     .order("created_at", { ascending: false });
+     .select("*")
+     .eq("is_active", true);
    if(error) throw error;
    booksFromDatabase = true;
    books = (data || []).map((b, index) => ({
-     id: b.id, title: b.title || "كتاب", author: b.author || "",
+     id: b.id ?? ("book-" + index), title: b.title || "كتاب", author: b.author || "",
      cat: b.category || "روايات عربية", price: Number(b.price || 0),
      old: null, tag: "", color: "#4bb2ef", cover: b.title || "كتاب",
      image_url: b.image_url || "", description: b.description || "",
-     stock: Number(b.stock ?? 0)
-   }));
+     stock: Number(b.stock ?? 0), created_at: b.created_at || ""
+   })).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
    renderProducts();
    if(!books.length) showToast("اتصل الموقع بقاعدة البيانات، لكن جدول الكتب فارغ");
  } catch(err) {
    console.error("Supabase books error:", err);
-   showToast("تعذّر تحميل الكتب من قاعدة البيانات؛ تحقق من المفتاح والسياسات");
+   showToast("تعذّر تحميل الكتب. افتح Console لمعرفة السبب، وتم إبقاء العرض متاحاً.");
  }
 }
 function updateCartCount(){let n=Object.values(cart).reduce((a,b)=>a+b,0);document.getElementById("cartcount").textContent=n;document.getElementById("cartcountm").textContent=n}
@@ -212,4 +220,10 @@ renderProducts();updateCartCount();
 if(supabaseClient) loadBooksFromSupabase();
 else console.warn("Add the Supabase publishable key to enable live database integration.");
 </script>
+
+<div id="social-contact-links" style="position:fixed;bottom:14px;left:14px;right:14px;z-index:9999;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;pointer-events:none">
+  <a href="https://wa.me/9647752275134" target="_blank" rel="noopener noreferrer" style="pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:12px 18px;border-radius:14px;font-weight:700;box-shadow:0 4px 16px #0002">تواصل عبر واتساب</a>
+  <a href="https://www.instagram.com/digitallibrary43/" target="_blank" rel="noopener noreferrer" style="pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#C13584;color:#fff;text-decoration:none;padding:12px 18px;border-radius:14px;font-weight:700;box-shadow:0 4px 16px #0002">تابعنا على إنستغرام</a>
+</div>
+
 </body></html>

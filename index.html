@@ -22,6 +22,19 @@ header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--deep);color:var(--onblue);padding:.7rem 1.5rem;border-radius:999px;font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px var(--deep)}
 .btn.ghost{background:transparent;color:var(--deep);border:2px solid var(--blue)}
+.social-btn svg,.footer-link svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.social-btn{padding:.62rem 1.1rem}
+footer{padding:30px 0 26px}
+.footer-content{display:grid;gap:9px;justify-items:center}
+.footer-links{display:flex;justify-content:center;align-items:center;gap:8px 18px;flex-wrap:wrap}
+.footer-link{display:inline-flex;align-items:center;gap:7px;color:var(--deep);text-decoration:none;font-weight:700}
+.footer-link:hover{text-decoration:underline}
+.powered{margin:2px 0 0;color:var(--mut);font-size:14px;display:grid;justify-items:center;gap:3px;line-height:1.5}
+.powered-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.powered-name{color:var(--deep);font-weight:800;text-decoration:none;direction:ltr;display:inline-block;font-size:16px}
+.powered-handle{color:var(--mut);font-weight:700;text-decoration:none;direction:ltr;display:inline-block;font-size:13px}
+.powered a:hover{text-decoration:underline}
+.footer-email{direction:ltr}
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:56px 0 64px}
 .hero h1{font-size:clamp(34px,6vw,58px);line-height:1.25;margin:0 0 14px;font-weight:800}
 .hl{color:var(--deep);background:linear-gradient(var(--blue),var(--blue)) no-repeat 100% 100%/100% 5px;padding-bottom:4px}
@@ -30,9 +43,9 @@ header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88
 .logo{display:flex;justify-content:center}
 .logo img{width:min(100%,330px);height:auto;animation:float 5s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-12px)}}
-section{padding:60px 0}
+section{padding:34px 0}
 h2{font-size:clamp(26px,4vw,38px);margin:0 0 8px;font-weight:800;text-align:center}
-.sub{color:var(--mut);text-align:center;margin:0 auto 36px;max-width:520px}
+.sub{color:var(--mut);text-align:center;margin:0 auto 22px;max-width:520px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 22px;transition:transform .25s,box-shadow .25s}
 .card:hover{transform:translateY(-6px);box-shadow:0 18px 34px -22px var(--deep)}
@@ -44,11 +57,35 @@ h2{font-size:clamp(26px,4vw,38px);margin:0 0 8px;font-weight:800;text-align:cent
 .steps{counter-reset:s}
 .step{position:relative;padding-top:20px}
 .step:before{counter-increment:s;content:counter(s);position:absolute;top:-18px;right:22px;width:38px;height:38px;border-radius:50%;background:var(--blue);color:var(--onblue);display:grid;place-items:center;font-weight:800}
-.final{text-align:center;padding:72px 0}
+.final{text-align:center;padding:38px 0}
 .final .en{font-family:"Poppins",sans-serif;color:var(--deep);letter-spacing:.06em;direction:ltr;font-weight:500;margin:0 0 6px}
-footer{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:var(--mut);font-size:14px}
+footer{border-top:1px solid var(--line);padding:14px 0 16px;text-align:center;color:var(--mut);font-size:14px}
+
+/* Refined footer hierarchy: contact, owners, then design credit */
+footer{padding:18px 0 20px}
+.footer-content{display:flex;flex-direction:column;align-items:center;gap:10px}
+.footer-brand{font-size:19px}
+.footer-contact{width:100%;display:flex;justify-content:center;align-items:flex-start;gap:clamp(22px,6vw,64px);flex-wrap:wrap}
+.footer-main-link{font-size:clamp(18px,3vw,22px);font-weight:800;gap:9px;direction:ltr}
+.footer-main-link svg{width:25px;height:25px}
+.footer-instagram-group{display:flex;flex-direction:column;align-items:center;gap:2px}
+.footer-email{font-size:13px;color:var(--mut);text-decoration:none;direction:ltr;line-height:1.4}
+.footer-email:hover{text-decoration:underline}
+.footer-owners{display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:3px}
+.footer-section-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:800}
+.owner-handles{display:flex;align-items:center;gap:10px;direction:ltr;font-size:16px;font-weight:800}
+.owner-handles a{color:var(--deep);text-decoration:none}
+.owner-handles a:hover{text-decoration:underline}
+.powered{margin-top:2px;gap:1px}
+.powered-label{font-size:11px;letter-spacing:.08em}
+.powered-name{font-size:15px}
+.powered-handle{font-size:13px}
+@media(max-width:520px){.footer-contact{flex-direction:row;justify-content:center;align-items:center;gap:8px 18px}.footer-main-link{font-size:18px}.owner-handles{font-size:15px}}
+
+/* Keep content visible even if scroll-reveal scripts are unavailable */
+.rv{opacity:1;transform:none}
 footer b{font-family:"Poppins",sans-serif;letter-spacing:.12em;color:var(--deep);font-weight:600}
-.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.on{opacity:1;transform:none}
+.rv,.rv.on{opacity:1;transform:none;transition:opacity .35s,transform .35s}
 @media (max-width:760px){.hero{grid-template-columns:1fr;text-align:center;padding-top:32px}.hero p{margin-inline:auto}.cta{justify-content:center}.logo{order:-1}.logo img{width:200px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
@@ -87,7 +124,7 @@ footer b{font-family:"Poppins",sans-serif;letter-spacing:.12em;color:var(--deep)
 #done{display:none;gap:10px}#msg{height:170px;font-size:14px}
 :focus-visible{outline:3px solid var(--deep);outline-offset:2px}
 
-.rail-wrap{position:relative;margin:0 0 38px}
+.rail-wrap{position:relative;margin:0 0 22px}
 .rail-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
 .rail-head h3{margin:0;font-size:22px;color:var(--deep)}
 .rail-controls{display:flex;gap:7px}
@@ -100,12 +137,103 @@ footer b{font-family:"Poppins",sans-serif;letter-spacing:.12em;color:var(--deep)
 .bookrail .book h3{font-size:15px;line-height:1.5}
 .wa-btn{display:block;text-align:center;text-decoration:none;background:#e8f7ee;color:#167a43;border:1px solid #b9e5ca;border-radius:999px;padding:7px 10px;font-weight:700;font-size:13px;margin-top:8px}
 .rail-empty{padding:22px;border:1px dashed var(--line);border-radius:16px;color:var(--mut);text-align:center}
+#all-book-grid .book{width:auto;min-width:0}
+#catalog-count{margin:0 auto 16px}
+#catalog-search:focus{outline:2px solid var(--deep);outline-offset:2px}
 @media(max-width:520px){.bookrail .book{width:174px;min-width:174px}.bookrail .cover{height:205px}.rail-head h3{font-size:19px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style id="footer-visibility-fix">
+footer{display:block!important;position:relative!important;min-height:0!important;height:auto!important;overflow:visible!important;padding:22px 16px 28px!important}
+footer .footer-content{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:12px!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important}
+footer .footer-brand,footer .footer-contact,footer .footer-owners,footer .powered{display:flex!important;visibility:visible!important;opacity:1!important;position:static!important;transform:none!important;height:auto!important;max-height:none!important;overflow:visible!important}
+footer .footer-brand{display:block!important;margin:0 0 3px!important}
+footer .footer-contact{flex-direction:row!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;gap:8px 22px!important}
+footer .footer-instagram-group,footer .footer-owners{display:flex!important;flex-direction:column!important;align-items:center!important}
+footer .footer-owners{gap:4px!important;padding-top:5px!important}
+footer .powered{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;margin:4px 0 0!important;line-height:1.45!important}
+footer .powered-label,footer .powered-name,footer .powered-handle,footer .footer-email{display:block!important;visibility:visible!important;opacity:1!important}
+footer .powered-name{font-size:16px!important}
+footer .powered-handle{font-size:14px!important}
+footer .footer-email{font-size:13px!important}
+@media(max-width:520px){footer .footer-contact{gap:8px 16px!important}footer .footer-main-link{font-size:18px!important}}
+</style>
+
+
+<style id="footer-contact-inline-fix">
+footer .footer-contact{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:clamp(12px,3vw,28px)!important;
+  width:100%!important;
+}
+footer .footer-contact > a.footer-main-link,
+footer .footer-contact > .footer-instagram-group{
+  display:flex!important;
+  flex:0 1 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin:0!important;
+}
+footer .footer-contact > .footer-instagram-group{
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+footer .footer-contact .footer-main-link{
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+  width:auto!important;
+  font-size:clamp(14px,3.8vw,22px)!important;
+  gap:7px!important;
+}
+footer .footer-contact .footer-main-link svg{
+  flex:0 0 25px!important;
+}
+@media(max-width:380px){
+  footer .footer-contact{gap:8px!important}
+  footer .footer-contact .footer-main-link{font-size:13px!important;gap:4px!important}
+  footer .footer-contact .footer-main-link svg{width:20px!important;height:20px!important;flex-basis:20px!important}
+}
+</style>
+
+
+<style id="iraq-delivery-banner-style">
+.iraq-delivery-banner{
+  width:100%;
+  background:var(--bg2);
+  border-bottom:1px solid var(--line);
+  color:var(--ink);
+  text-align:center;
+  padding:10px 14px;
+  font-family:"Cairo",system-ui,sans-serif;
+  font-size:clamp(14px,3.6vw,17px);
+  font-weight:800;
+  line-height:1.55;
+}
+.iraq-delivery-banner strong{color:var(--deep);white-space:nowrap}
+.iraq-delivery-banner .delivery-separator{display:inline-block;margin:0 8px;color:var(--blue)}
+@media(max-width:380px){.iraq-delivery-banner{padding:8px 10px;font-size:13px}.iraq-delivery-banner .delivery-separator{margin:0 4px}}
+</style>
+
 </head>
 <body>
-<header><div class="wrap nav"><div class="brand">DIGITAL <small>Library</small></div><div class="navr"><a class="btn" href="https://www.instagram.com/digitallibrary43" target="_blank" rel="noopener">تابعنا</a></div></div></header>
+<header><div class="wrap nav"><div class="brand">DIGITAL <small>Library</small></div><div class="navr"><a class="btn social-btn" href="https://www.instagram.com/digitallibrary43/" target="_blank" rel="noopener" aria-label="تابعنا على إنستغرام"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg><span>تابعنا</span></a></div></div></header>
+
+<div class="iraq-delivery-banner" role="note" aria-label="معلومات التوصيل">
+  التوصيل لجميع محافظات العراق
+  <span class="delivery-separator">|</span>
+  <strong>٥٬٠٠٠ دينار عراقي</strong>
+</div>
+
 
 <main>
 <div class="wrap hero">
@@ -126,6 +254,14 @@ footer b{font-family:"Poppins",sans-serif;letter-spacing:.12em;color:var(--deep)
  <div class="rail-wrap"><div class="rail-head"><h3>سلاسل</h3><div class="rail-controls"><button type="button" aria-label="السابق" onclick="scrollRail('series',1)">‹</button><button type="button" aria-label="التالي" onclick="scrollRail('series',-1)">›</button></div></div><div class="bookrail" id="rail-series"></div></div>
  <div class="rail-wrap"><div class="rail-head"><h3>كتب دينية</h3><div class="rail-controls"><button type="button" aria-label="السابق" onclick="scrollRail('religious',1)">‹</button><button type="button" aria-label="التالي" onclick="scrollRail('religious',-1)">›</button></div></div><div class="bookrail" id="rail-religious"></div></div>
  <div class="rail-wrap"><div class="rail-head"><h3>تنمية بشرية وفلسفة</h3><div class="rail-controls"><button type="button" aria-label="السابق" onclick="scrollRail('growth',1)">‹</button><button type="button" aria-label="التالي" onclick="scrollRail('growth',-1)">›</button></div></div><div class="bookrail" id="rail-growth"></div></div>
+</div></section>
+
+<section id="all-books" class="alt"><div class="wrap">
+ <h2>مكتبة <span class="hl">كل الكتب</span></h2>
+ <p class="sub">ابحث بين جميع الكتب المتوفرة في مكتبتنا.</p>
+ <div style="max-width:560px;margin:0 auto 26px"><input id="catalog-search" type="search" placeholder="ابحث باسم الكتاب أو المؤلف أو التصنيف..." aria-label="ابحث في كل الكتب" style="width:100%;padding:13px 18px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font:inherit"></div>
+ <div id="catalog-count" class="sub" aria-live="polite"></div>
+ <div id="all-book-grid" class="grid"></div>
 </div></section>
 
 <section id="why" class="alt"><div class="wrap">
@@ -157,7 +293,35 @@ footer b{font-family:"Poppins",sans-serif;letter-spacing:.12em;color:var(--deep)
 </div></section>
 </main>
 
-<footer><div class="wrap"><b>DIGITAL Library</b></div></footer>
+<footer>
+ <div class="wrap footer-content">
+  <b class="footer-brand">DIGITAL Library</b>
+  <div class="footer-contact">
+   <a class="footer-link footer-main-link" href="https://wa.me/9647752275134" target="_blank" rel="noopener" aria-label="واتساب مكتبة ديجيتال">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.7A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.5 8.5c.5 2.6 2.4 4.5 5 5l1.2-1.2 2 1c-.2 1.4-1.3 2.2-2.7 2.1-3.6-.4-6.9-3.7-7.3-7.3-.1-1.4.7-2.5 2.1-2.7l1 2-1.3 1.1Z"/></svg>
+    <span>07752275134</span>
+   </a>
+   <div class="footer-instagram-group">
+    <a class="footer-link footer-main-link" href="https://www.instagram.com/digitallibrary43/" target="_blank" rel="noopener" aria-label="إنستغرام مكتبة ديجيتال">
+     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+     <span>@digitallibrary43</span>
+    </a>
+   </div>
+  </div>
+  <div class="footer-owners">
+   <span class="footer-section-label">LIBRARY OWNER</span>
+   <div class="owner-handles">
+    <a href="https://www.instagram.com/20kvx/" target="_blank" rel="noopener">@20kvx</a>
+   </div>
+  </div>
+  <div class="powered">
+   <span class="powered-label">DESIGNED &amp; DEVELOPED BY</span>
+   <a class="powered-name" href="https://www.instagram.com/m_hmd43/" target="_blank" rel="noopener">Mohammed Tariq</a>
+   <a class="powered-handle" href="https://www.instagram.com/m_hmd43/" target="_blank" rel="noopener">@m_hmd43</a>
+   <a class="footer-email" href="mailto:mtarik437@gmail.com">mtarik437@gmail.com</a>
+  </div>
+ </div>
+</footer>
 <script>
 const SUPABASE_URL="https://djrjahfqqjsczrfxfutm.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_Qf7gH2SRJy3k6c17-wAS9w_hKoRETEz";
@@ -166,25 +330,32 @@ const WA="9647752275134";
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function money(n){return Number(n||0).toLocaleString("en-US")+" د.ع"}
 function scrollRail(id,dir){const el=document.getElementById("rail-"+id);el.scrollBy({left:dir*el.clientWidth*.8,behavior:"smooth"})}
-function classify(b){const c=(b.cat||"").toLowerCase(),t=(b.title||"").toLowerCase(),a=(b.author||"").toLowerCase();
- if(/الأكثر مبيع|الاكثر مبيع|best.?seller|bestseller/.test(c))return "best";
- if(/سلسلة|سلاسل|series/.test(c+" "+t))return "series";
- if(/دين|إسلام|اسلام|قرآن|قران|فقه|حديث|سيرة نبوية/.test(c+" "+t))return "religious";
- if(/تنمية|تطوير الذات|فلسف|علم النفس|self.?help|philosoph/.test(c+" "+t))return "growth";
+function classify(b){
+ const c=String(b.cat||"").toLowerCase(),t=String(b.title||"").toLowerCase(),a=String(b.author||"").toLowerCase(),d=String(b.description||"").toLowerCase();
+ const all=c+" "+t+" "+a+" "+d;
+ // الأكثر مبيعاً لا يُستنتج بالتخمين؛ يُحدد بوضع تصنيف واضح في حقل category.
+ if(/الأكثر مبيع|الاكثر مبيع|الأكثر طلب|الاكثر طلب|best.?seller|bestseller/.test(c))return "best";
+ if(/سلسلة|سلاسل|الجزء\s*(الأول|الثاني|الثالث|الرابع|الخامس|[0-9٠-٩])|رواية\s*\d|series|volume\s*[0-9]/.test(all))return "series";
+ if(/دين|إسلام|اسلام|قرآن|قران|فقه|حديث|سيرة نبوية|تفسير|عقيدة|عبادات|الصحابة/.test(all))return "religious";
+ if(/تنمية|تطوير الذات|تطوير شخصي|فلسف|علم النفس|سيكولوج|وعي|تحفيز|إدارة الذات|self.?help|philosoph|psycholog/.test(all))return "growth";
  return "mixed";
 }
 function card(b){const img=b.image_url?`<img src="${esc(b.image_url)}" alt="غلاف ${esc(b.title)}" loading="lazy">`:`<div class="cover-fallback">${esc(b.title)}</div>`;
- const msg=encodeURIComponent(`السلام عليكم، أريد الاستفسار عن كتاب: ${b.title}
-السعر: ${money(b.price)}`);
+ const msg=encodeURIComponent(`السلام عليكم، أريد الاستفسار عن كتاب: ${b.title}\nالسعر: ${money(b.price)}`);
  return `<article class="book"><div class="cover">${img}</div><div class="binfo"><h3>${esc(b.title)}</h3><div class="fields"><span>${esc(b.author||"")}</span></div><div class="brow"><span class="price">${money(b.price)}</span></div><a class="wa-btn" href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener">استفسر عبر واتساب</a></div></article>`;
 }
-function render(books){const groups={best:[],mixed:[],series:[],religious:[],growth:[]};books.forEach(b=>groups[classify(b)].push(b));
- Object.keys(groups).forEach(k=>{const el=document.getElementById("rail-"+k);const arr=groups[k];el.innerHTML=arr.length?arr.map(card).join(""):`<div class="rail-empty">${k==="best"?"سيتم عرض الكتب الأكثر مبيعاً عند تحديدها من إدارة المكتبة.":"لا توجد كتب مضافة لهذا القسم حالياً."}</div>`;});
+let allBooks=[];
+function render(books){allBooks=books;const groups={best:[],mixed:[],series:[],religious:[],growth:[]};books.forEach(b=>groups[classify(b)].push(b));
+ Object.keys(groups).forEach(k=>{const el=document.getElementById("rail-"+k);const arr=groups[k];el.innerHTML=arr.length?arr.map(card).join(""):`<div class="rail-empty">${k==="best"?"سيتم عرض الكتب الأكثر مبيعاً عند تحديدها في تصنيف الكتاب داخل إدارة المكتبة.":"لا توجد كتب مضافة لهذا القسم حالياً."}</div>`;});
+ renderCatalog(books);
 }
+function renderCatalog(books){const grid=document.getElementById("all-book-grid"),count=document.getElementById("catalog-count");if(!grid||!count)return;count.textContent=`عدد الكتب المعروضة: ${books.length}`;grid.innerHTML=books.length?books.map(card).join(""):'<div class="rail-empty">لا توجد نتائج مطابقة لبحثك.</div>';}
+const catalogSearch=document.getElementById("catalog-search");
+if(catalogSearch)catalogSearch.addEventListener("input",()=>{const q=catalogSearch.value.trim().toLowerCase();renderCatalog(allBooks.filter(b=>[b.title,b.author,b.cat,b.description].join(" ").toLowerCase().includes(q)));});
 async function loadBooks(){const rails=document.querySelectorAll(".bookrail");if(!db){rails.forEach(x=>x.innerHTML='<div class="rail-empty">تعذّر الاتصال بقاعدة بيانات الكتب.</div>');return;}
  const {data,error}=await db.from("books").select("id,title,author,describe,price,image_url,stock,category,is_active,created_at").eq("is_active",true).order("created_at",{ascending:false});
  if(error){console.error(error);rails.forEach(x=>x.innerHTML='<div class="rail-empty">تعذّر تحميل الكتب حالياً. حاول تحديث الصفحة.</div>');return;}
- render((data||[]).map(b=>({id:b.id,title:b.title,author:b.author,cat:b.category||"منوّع",price:Number(b.price||0),image_url:b.image_url||""})));
+ render((data||[]).map(b=>({id:b.id,title:b.title,author:b.author,cat:b.category||"منوّع",description:b.describe||"",price:Number(b.price||0),image_url:b.image_url||""})));
 }
 loadBooks();
 </script>

@@ -461,6 +461,11 @@ function render(books){
    el.innerHTML=pages.map(page=>`<div class="bookrail-page">${page.map(card).join("")}</div>`).join("");
  });
 }
+async function loadBooks(){const rails=document.querySelectorAll(".bookrail");if(!db){rails.forEach(x=>x.innerHTML='<div class="rail-empty">تعذّر الاتصال بقاعدة بيانات الكتب.</div>');return;}
+ const {data,error}=await db.from("books").select("id,title,author,describe,price,image_url,stock,category,is_active,created_at").eq("is_active",true).order("created_at",{ascending:false});
+ if(error){console.error(error);rails.forEach(x=>x.innerHTML='<div class="rail-empty">تعذّر تحميل الكتب حالياً. حاول تحديث الصفحة.</div>');return;}
+ render((data||[]).map(b=>({id:b.id,title:b.title,author:b.author,cat:b.category||"منوّع",description:b.describe||"",price:Number(b.price||0),image_url:b.image_url||""})));
+}
 loadBooks();
 </script>
 </body>
